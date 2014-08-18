@@ -1,0 +1,20 @@
+[
+    {
+        "_id": "_design/matching",
+        "language": "javascript",
+        "views": {
+            "byts": {
+                "map": "function(doc) {  emit(doc.ts, null); }"
+            }
+        }
+    },
+    {
+        "_id": "_design/search",
+        "language": "javascript",
+        "indexes": {
+            "ft": {
+                "index": "function(doc) { index('title', doc.title, {store: 'no', index: 'analyzed'}); index('body', doc.body, {store: 'no', index: 'analyzed'}); }"
+            }
+        }
+    }
+]

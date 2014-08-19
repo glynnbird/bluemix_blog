@@ -8,7 +8,7 @@ var addBlogSubmit = function() {
     url: "/api/add",
     data: post
   }).done(function(msg) {
-     $('#timeline').prepend(renderPost(post));
+     
   })
   
   return false;
@@ -29,8 +29,16 @@ var renderPost = function(post) {
   return html;
 }
 
+var socket = null;
+
 $(document).ready(function () { 
   console.log("getting posts");
+
+  socket = io.connect(location.origin);
+  socket.on('post', function (data) {
+    $('#timeline').prepend(renderPost(data));
+  });
+  
   getLatestPosts(function(posts) {
     console.log("Got",posts)
     for(var i in posts) {

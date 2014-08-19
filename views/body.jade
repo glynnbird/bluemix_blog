@@ -1,11 +1,13 @@
 body
 
-    
-  form(role="form",onsubmit="return addBlogSubmit()")
-    div.form-group
-      label(for="blogTitle") Title
-      input#blogTitle(type="text", class="form-control", placeholder="Enter blog title")
-    div.form-group
-      label(for="blogBody") Body
-      input#blogBody(type="text",class="form-control", placeholder="Enter blog body")
-    button.btn.btn-default(type="submit") Submit
+  div.container-fluid
+    div#timeline
+      
+    form.navbar-form.navbar-fixed-bottom(role="form",onsubmit="return addBlogSubmit()")
+      div.form-group
+        label.sr-only(for="blogTitle") Title
+        input#blogTitle(type="text", class="form-control", placeholder="Enter blog title")
+      div.form-group
+        label.sr-only(for="blogBody") Body
+        input#blogBody(type="text",class="form-control", placeholder="Enter blog body")
+      button.btn.btn-default(type="submit") Submit

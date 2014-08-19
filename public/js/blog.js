@@ -1,17 +1,42 @@
 
 var addBlogSubmit = function() {
-  console.log("Woot");
   var body = $('#blogBody').val();
   var title = $('#blogTitle').val();
-  console.log("Creating new blog",title,body);
-  
+  var post = { body: body, title: title};
   $.ajax({
     type: "GET",
     url: "/api/add",
-    data: { body: body, title: title}
+    data: post
   }).done(function(msg) {
-    console.log("!!! "+msg)
+     $('#timeline').prepend(renderPost(post));
   })
   
   return false;
 }
+
+var getLatestPosts = function(callback) {
+  
+  $.ajax({
+    type: "GET",
+    url: "/api/recent"
+  }).done(function(msg) {
+     callback(msg);
+  });
+}
+
+var renderPost = function(post) {
+  var html = '<div class="alert alert-success"><b>'+post.title+'</b> '+post.body+'</div>';
+  return html;
+}
+
+$(document).ready(function () { 
+  console.log("getting posts");
+  getLatestPosts(function(posts) {
+    console.log("Got",posts)
+    for(var i in posts) {
+      var post = posts[i];
+       $('#timeline').append(renderPost(post));
+    }
+  });
+  
+});

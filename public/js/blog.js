@@ -4,6 +4,14 @@ var addBlogSubmit = function() {
   var body = $('#blogBody').val();
   var title = $('#blogTitle').val();
   console.log("Creating new blog",title,body);
-  addBlog(title, body);
+  
+  $.ajax({
+    type: "GET",
+    url: "/api/add",
+    data: { body: body, title: title}
+  }).done(function(msg) {
+    console.log("!!! "+msg)
+  })
+  
   return false;
 }

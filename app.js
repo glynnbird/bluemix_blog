@@ -5,8 +5,8 @@
 // This sample application uses express as web application framework (http://expressjs.com/),
 // and jade as template engine (http://jade-lang.com/).
 
-var express = require('express');
-var blog = require('./lib/blog.js');
+var express = require('express'),
+  blog = require('./lib/blog.js');
 
 // setup middleware
 var app = express();
@@ -27,7 +27,7 @@ app.get("/api/add", function(req,res) {
   });
 });
 
-app.get("/api/getrecent", function(req,res) {
+app.get("/api/recent", function(req,res) {
   blog.getRecentBlogPosts( function(err, data) {
     res.send(data);
   });

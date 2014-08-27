@@ -8,7 +8,7 @@ var addBlogSubmit = function() {
     url: "/api/add",
     data: post
   }).done(function(msg) {
-     
+    $('#timeline').prepend(renderPost(msg));
   })
   
   return false;
@@ -26,22 +26,24 @@ var getLatestPosts = function(callback) {
 
 var renderPost = function(post) {
   var t = moment.unix(post.ts);
-  var html = '<div class="alert alert-success"><b>'+post.title+'</b> '+post.body+'<br><span class="label label-default">'+t.format("YYYY-MM-DD HH:mm:ss")+'</span></div>';
+  var html = '<div id="' + post._id + '" class="alert alert-success"><b>'+post.title+'</b> '+post.body+'<br><span class="label label-default">'+t.format("YYYY-MM-DD HH:mm:ss")+'</span></div>';
   return html;
 }
 
 var socket = null;
 
 $(document).ready(function () { 
-  console.log("getting posts");
 
   socket = io.connect(location.origin);
   socket.on('post', function (data) {
-    $('#timeline').prepend(renderPost(data));
+    // if the post doesn't already exist,
+    if($('#'+data._id).length==0) {
+      $('#timeline').prepend(renderPost(data));
+    }
+
   });
   
   getLatestPosts(function(posts) {
-    console.log("Got",posts)
     for(var i in posts) {
       var post = posts[i];
        $('#timeline').append(renderPost(post));

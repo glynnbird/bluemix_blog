@@ -7,7 +7,8 @@
 		"jade": "1.1.4",
     "nano": "5.10.0",
     "moment": "2.8.1",
-    "socket.io": "1.0.6"
+    "socket.io": "1.0.6",
+    "mqlight": "0.1.2014062301"
 	},
 	"engines": {
 		"node": "0.10.26"

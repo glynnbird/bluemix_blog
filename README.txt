@@ -1,30 +1,14 @@
-# Node.js Starter Application
+# BlueMix blog
 
-Bluemix provides a Node.js starter application as a template so that you can add your code and push the changes back to the Bluemix environment.
+This is a demo application to test out Node.js, Cloudant and BlueMix.
 
+It is a simple blogging application with the data being stored in a Cloudant database. When a blog post is published, it is:
 
-## Files
+* stored in Clouding
+* sent to the MQlight message queue
+* each server picks up the item from the message queue and broadcasts it to all connected clients via Websockets
 
-The Node.js starter application has files as below:
+This introduces a delay in publishing, but makes the solution scalable over any number of servers. 
 
-*   instructions.md
-
-	This file describes the Next Steps for getting started with this template.
-
-*   app.js
-
-	This file contains the server side JavaScript code for your application written using the Node.js API
-
-*   views/
-
-	This directory contains the views of the application. It is required by the express framework and jade template engine in this sample application.
-
-*   public/
-
-	This directory contains public resources of the application. It is required by the express framework in this sample application.
-
-*   package.json
-
-	This file is required by the Node.js environment. It specifies this Node.js project name, dependencies, and other configurations of your Node.js application.
-
+It’s only a demo.
 

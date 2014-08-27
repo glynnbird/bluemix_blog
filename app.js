@@ -6,7 +6,8 @@
 // and jade as template engine (http://jade-lang.com/).
 
 var express = require('express'),
-  blog = require('./lib/blog.js');
+  blog = require('./lib/blog.js'),
+  mqlight = require('./lib/mqlight.js');
 
 // setup middleware
 var app = express();
@@ -29,7 +30,7 @@ app.get('/', function(req, res){
 app.get("/api/add", function(req,res) {
   blog.addBlogPost(req.query.title, req.query.body, function(err, data) {
     res.send(data);
-    io.emit('post',data);
+    mqlight.send("broadcast", data);
   });
 });
 
@@ -60,6 +61,10 @@ var port = (process.env.VCAP_APP_PORT || 3000);
 server.listen(port, host);
 console.log('App started on port ' + port);
 
+mqlight.on('message', function(msg) {
+  io.emit('post',msg);
+  console.log("received mqlight message",msg);
+});
 /*io.on('connection', function (socket) {
   socket.emit('news', { hello: 'world' });
 });

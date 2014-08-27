@@ -26,7 +26,7 @@ var getLatestPosts = function(callback) {
 
 var renderPost = function(post) {
   var t = moment.unix(post.ts);
-  var html = '<div class="alert alert-success"><b>'+post.title+'</b> '+post.body+'<br><span class="label label-default">'+t.format("YYYY-MM-DD HH:MM:SS")+'</span></div>';
+  var html = '<div class="alert alert-success"><b>'+post.title+'</b> '+post.body+'<br><span class="label label-default">'+t.format("YYYY-MM-DD HH:mm:ss")+'</span></div>';
   return html;
 }
 
